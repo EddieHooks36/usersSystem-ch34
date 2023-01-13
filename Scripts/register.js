@@ -5,7 +5,7 @@
 //let copy = $(.form).clone();
 //$(".form").slideUp(5000);
 
-function User(firstname, lastname, age, gender, phone, payment, color){
+function User(firstname, lastname, age, gender, phone, payment, color,email,password){
     this.fname=firstname;
     this.lname=lastname;
     this.age=age;
@@ -13,23 +13,42 @@ function User(firstname, lastname, age, gender, phone, payment, color){
     this.phone=phone;
     this.payment=payment;
     this.color=color;
+    this.email=email;
+    this.passward=password
 }
+function validation(user){
+    let valid = true;
+    if(user.email==""){
+        valid = false;
+        $("#txtEmail").addClass("alert-error");
 
+    }
 
+    return valid;
 
-function register(){
+}
+let inputFname = $("#txtFirstName");
+let inputLname = $("#txtLastName");
+let inputAge = $("#txtAge");
+let inputGender = $("#txtGender");
+let inputPhone = $("#txtPhone");
+let inputPayment = $("#selPayment");
+let inputColor = $("#selColor");
+let inputEmail = $("#txtEmail");
+let inputPassword = $("#txtPassword");
 
-    let inputFname = $("#txtFirstName").val();
-    let inputLname = $("#txtLastName").val();
-    let inputAge = $("#txtAge").val();
-    let inputGender = $("#txtGender").val();
-    let inputPhone = $("#txtPhone").val();
-    let inputPayment = $("#selPayment").val();
-    let inputColor = $("#selColor").val();
+     function register(){
 
-    let newUser=new User(inputFname,inputLname,inputAge,inputGender,inputPhone,inputPayment,inputColor);
+   
 
-    saveUser(newUser); //This function is on the storeManager
+    let newUser=new User(inputFname.val(),inputLname.val(),inputAge.val(),inputGender.val(),inputPhone.val(),inputPayment.val(),inputColor.val(),inputEmail.val(),inputPassword.val());
+
+    if(validation(newUser)==true){
+        saveUser(newUser); //This function is on the storeManager
+        $("input").val(""); //Clears all the input value
+    }
+
+    
 
     console.log(newUser);
 }
